@@ -26,5 +26,9 @@ class MediaPipeline extends MediaObject implements Interfaces\MediaPipeline {
     public function getJsonRpc(){
         return $this->jsonRpc;
     }
-    
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 }

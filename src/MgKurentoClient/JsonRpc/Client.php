@@ -23,7 +23,7 @@ class Client{
      */
     protected $wsClient;
     protected $id = 0;
-    protected $sessionId = null;
+    public $sessionId = null;
     protected $callbacks = array();
     protected $subscriptions = array();
     protected $logger = null;
@@ -162,7 +162,7 @@ class Client{
             if(!$success){                
                 return false;                
             }
-            $this->subscriptions[$data['value']] = $onEvent;
+            $this->subscriptions['OnIceCandidate'] = $onEvent;
             $callback($success, $data);            
         });
     }

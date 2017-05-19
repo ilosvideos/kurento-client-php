@@ -17,8 +17,9 @@ class MediaObject implements Interfaces\MediaObject {
     protected $subscriptions = array();
 
 
-    function __construct(Interfaces\MediaPipeline $pipeline) {
+    function __construct(Interfaces\MediaPipeline $pipeline, $id = null) {
         $this->pipeline = $pipeline;
+        $this->id = $id;
     }
 
     
@@ -69,7 +70,7 @@ class MediaObject implements Interfaces\MediaObject {
         $this->pipeline->getJsonRpc()->sendRelease($this->getId(), $callback);
     }
     
-    protected function remoteSubscribe($type, $onEvent, callable $callback){
+    public function remoteSubscribe($type, $onEvent, callable $callback){
         $this->pipeline->getJsonRpc()->sendSubscribe($this->getId(), $type, $onEvent, $callback);
     }
     

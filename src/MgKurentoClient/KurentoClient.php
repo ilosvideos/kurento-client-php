@@ -68,11 +68,22 @@ class KurentoClient {
      *
      * @return Interfaces\MediaPipeline
      */
-    public function createMediaPipeline(callable $callback) {        
+    public function createMediaPipeline(callable $callback) {
         $this->pipeline = new MediaPipeline($this->jsonRpc);        
         $this->pipeline->build(function($success, $data) use ($callback){
             $callback($this->pipeline, $success, $data);
         });
+        return $this->pipeline;
+    }
+
+    public function loadMediaPipeline($id, $sessionId, callable $callback)
+    {
+        $this->pipeline = new MediaPipeline($this->jsonRpc);
+        $this->pipeline->setId($id);
+        $this->pipeline->getJsonRpc()->sessionId = $sessionId;
+
+        $callback($this->pipeline, true, null);
+
         return $this->pipeline;
     }
 
