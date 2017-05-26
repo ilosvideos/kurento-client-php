@@ -158,11 +158,11 @@ class Client{
         return $this->send('subscribe', array(
             'object'  => $object,
             'type'      => $type
-        ), function($success, $data) use($onEvent, $callback){
+        ), function($success, $data) use($onEvent, $callback, $type){
             if(!$success){                
                 return false;                
             }
-            $this->subscriptions['OnIceCandidate'] = $onEvent;
+            $this->subscriptions[$type] = $onEvent;
             $callback($success, $data);            
         });
     }
